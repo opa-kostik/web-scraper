@@ -1,12 +1,24 @@
 # web-scraper
 Given a starting URL, it should visit every reachable page under that domain.
 
+
 #### run it
 
 ```
-npm install
+npm install 
+node app.js "starting_url"
+```
+
+#### test it
+```
 npm test
 ```
+
+#### configurate
+'config.js' has following parameters:  
+
+1. MaxLevel - specifies depth of the recursive search, set '1' to disallow recursion, 
+2. Sources - Cheerio selectors for scraping assets.
 
 ##Description 
 Given a starting URL, it should visit every reachable page under that domain.
