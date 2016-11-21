@@ -8,7 +8,7 @@ const badLink  = '/some_path?query#hash';
 const goodLink = 'https://www.google.com/some_path?query#hash';
 const content  = fs.readFileSync('spec/example.html','utf-8');
 const resultLinks  = ['https://www.google.com/link/to/somepage/'];
-const resultAssets = ['https://script.js','https://style.css'];        
+const resultAssets = ['https://www.google.com/script.js','https://www.google.com/style.css'];        
 
 describe('The _utilities_ module', function () {
     it('getHostname()', function (){
