@@ -8,11 +8,11 @@ function getHostname(url){
 }
 
 function fetchAndScrape(url, callback){
-    request(url, (error, response, html) => {
+    request.get(url, (error, response, html) => {
         if (!error && response.statusCode == 200){
             scrape(html, callback);        
         }
-        else console.log(error);   
+        else callback(null);   
     })
 }
 
@@ -20,8 +20,12 @@ function isLink(url){
     return ( !!(/^((http[s]?:)?\/\/)/).test(url) )
 }
 
+function cleanQueryString(url){
+    return url.split('?')[0].split('#')[0];
+}
+
 function normalizeLink(url){
-    var result = url.split('?')[0].split('#')[0];
+    var result = cleanQueryString(url);
     if(!result.endsWith('/')) result = result + '/';
     return result;
 }
@@ -32,20 +36,33 @@ function scrape(html,callback){
     var $ = cheerio.load(html);
     Config.sources.forEach(source => {
         $(source.selector).each((i,sel) => {
+            //TODO: isLInk check replace. Links can be relative
             if (sel.attribs[source.attr] && isLink(sel.attribs[source.attr])){
                 if (source.type === Config.type.link){
                     var href = normalizeLink(sel.attribs[source.attr]);
                     if(links.indexOf(href) === -1 )
                         links.push(href);
-                }else     
-                    assets.push(sel.attribs[source.attr]);
+                }else{     
+                    var href = cleanQueryString(sel.attribs[source.attr]);
+                    if(assets.indexOf(href) === -1 )
+                        assets.push(href);
+                }
             }
         })
     });
     callback(assets,links);
 }
 
-module.exports.isLink = isLink;
-module.exports.normalizeLink = normalizeLink;
-module.exports.getHostname = getHostname;
-module.exports.fetchAndScrape = fetchAndScrape;
+function getOptions(){
+    return Config.options;
+}
+
+module.exports = { 
+    isLink,
+    normalizeLink,
+    getHostname,
+    fetchAndScrape,
+    scrape,
+    getOptions,
+    cleanQueryString
+}

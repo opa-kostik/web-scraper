@@ -1,9 +1,9 @@
 var Scraper = require('./scraper.js');  
+const url = process.argv[2];
 
-// var url = 'https://quotes.toscrape.com';
-var url = 'https://www.smashingmagazine.com';
-var options = {
-    maxLevel: 2
+if(!url)
+    console.log('please specify starting URL as a parameter');
+else{
+    var scraper = new Scraper(url);
+    scraper.run();
 }
-var scraper = new Scraper(url, options);
-scraper.run();

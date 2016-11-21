@@ -4,12 +4,22 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test-unit",
+    "test-unit": "NODE_ENV=test mocha --require co-mocha 'spec/*.spec.js'",
+    "test-cover": "istanbul cover node_modules/mocha/bin/_mocha -R spec ./spec"
   },
-  "author": "",
+  "author": "Konstantin Shirokov",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^0.22.0",
     "request": "^2.78.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "co-mocha": "^1.1.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   }
 }
