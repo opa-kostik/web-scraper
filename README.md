@@ -6,6 +6,7 @@ For each page, it should determine the URLs of every static asset (images, javas
 The crawler should output to STDOUT in JSON format listing the URLs of every static asset, grouped by page.
  
 For example:
+```json
 [
   {
     "url": "http://www.example.org",
@@ -23,4 +24,4 @@ For example:
   },
   ..
 ]
- 
+``` 
