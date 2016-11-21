@@ -1,6 +1,14 @@
 # web-scraper
 Given a starting URL, it should visit every reachable page under that domain.
 
+#### run it
+
+```
+npm install
+npm test
+```
+
+##Description 
 Given a starting URL, it should visit every reachable page under that domain.
 For each page, it should determine the URLs of every static asset (images, javascript, stylesheets) on that page.
 The crawler should output to STDOUT in JSON format listing the URLs of every static asset, grouped by page.
